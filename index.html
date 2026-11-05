@@ -3130,7 +3130,7 @@ function result(fromSave = false) {
     <div class="money ${won ? "" : "loss"}">${moneyLine}</div>
     <div class="title-card"><small>Your title today</small><strong id="digTitle">${goldWord(digTitle().name)}</strong><p>${digTitle().note}</p></div>
     ${PLAYTEST_MODE ? `<div class="playtest-send" id="playtestSendWrap">
-      <button type="button" class="primary" id="sendReport">Send report to host</button>
+      <button type="button" class="primary" id="sendReport">Copy report for host</button>
       <p class="send-status" id="sendReportStatus" role="status"></p>
     </div>` : ""}
     ${streak ? `<p><span class="streak-pill">${fire} ${streak}-day streak</span></p>` : ""}
@@ -3162,7 +3162,7 @@ function result(fromSave = false) {
         <button class="small" id="copyReport">Copy report</button>
         <button class="small" id="downloadReport">Download .txt</button>
       </div>
-      <p class="quiet">Testers: copy or download this report and send it to the host.</p>
+      <p class="quiet">Testers: copy or download this report and send it to me.</p>
     </details>` : ""}
     ${TEST_MODE ? `<div class="test-bar"><button class="small" id="again">Play again (test)</button><button class="small" id="testHome">Test home</button></div>` : `<p class="quiet">Come back tomorrow for Lucky Dig #${DAY_NUM + 1}.</p>`}`;
   document.getElementById("copyShare").onclick = () => copy(shareText(), "Result copied.", "share");
@@ -3204,10 +3204,10 @@ function result(fromSave = false) {
     const text = reportText();
     try {
       await navigator.clipboard.writeText(text);
-      if (status) status.textContent = "Copied — paste it to the host";
+      if (status) status.textContent = "Copied. Now paste it to me";
     } catch {
       downloadReportFile();
-      if (status) status.textContent = "Clipboard unavailable — downloaded .txt instead.";
+      if (status) status.textContent = "Clipboard unavailable. Downloaded a .txt — send that file to me.";
     }
   };
   const rest = document.getElementById("tryRest");
